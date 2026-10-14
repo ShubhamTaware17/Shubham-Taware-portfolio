@@ -1,0 +1,19 @@
+# Dependencies and build output
+node_modules
+dist
+coverage
+
+# Local environment files (keep secrets and personal contact details out of git)
+.env
+.env.local
+.env.*.local
+
+# Logs and editor noise
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.local

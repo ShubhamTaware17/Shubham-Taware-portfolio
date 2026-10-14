@@ -1,0 +1,74 @@
+[
+  {
+    "site": "rentalchaavi",
+    "url": "https://rentalchaavi.com",
+    "status": "success",
+    "metadata": {
+      "title": "RentalChaavi",
+      "description": "",
+      "keywords": "",
+      "h1": [
+        "Find Your Dream Home\nWithout Brokers"
+      ],
+      "h2": [
+        "Featured Property Deals",
+        "Why Choose RentalChaavi?",
+        "Ready to Find Your Perfect Home?",
+        "Find Properties Faster\nWith Our Mobile App"
+      ],
+      "bodySnippet": "RentalChaavi\nHome\nFeatures\nGet Started\nContact\nLogin\nGet Started\nNo Brokerage Platform\nFind Your Dream Home\nWithout Brokers\n\nतुमच्या प्रत्येक प्रॉपर्टी डीलमध्ये विश्वासाची साथ.\n\nYour Trusted Partner In Every Property Deal.\n\nBrowse Properties\nList Your Property\n\nविश्वास\n\nTrust\n\n100% Transparent Deals\n\nसहभाग\n\nPartnership\n\nDirect Owner Connect\n\nसुरक्षित व्यवहार\n\nSecure Deals\n\nVerified & Safe Listings\n\nनेहमी तुमच्या सोबत\n\nAlways With You\n\nSupport at Every Step\n\nLive Deals & Properties\nFeatured Prope",
+      "generator": "",
+      "scripts": [
+        "https://www.googletagmanager.com/gtag/js?id=G-ECKJ48R5TV",
+        "https://rentalchaavi.com/assets/index-fsTCR8Zt.js"
+      ]
+    },
+    "screenshotPath": "public/assets/projects/rentalchaavi-home.png"
+  },
+  {
+    "site": "dealskb",
+    "url": "https://dealskb.com",
+    "status": "success",
+    "metadata": {
+      "title": "",
+      "description": "",
+      "keywords": "",
+      "h1": [],
+      "h2": [],
+      "bodySnippet": "This website is not available. If you are trying to visit your own website, contact your hosting provider for assistance.",
+      "generator": "",
+      "scripts": []
+    },
+    "screenshotPath": "public/assets/projects/dealskb-home.png"
+  },
+  {
+    "site": "vahanfinserv",
+    "url": "https://vahanfinserv.com",
+    "status": "success",
+    "metadata": {
+      "title": "Vahan Finserv",
+      "description": "",
+      "keywords": "",
+      "h1": [
+        "Vahan Finserv",
+        "Get Your\nDream\nVehicle Loan",
+        "Vahan Finserv"
+      ],
+      "h2": [
+        "Trusted by the best banks in India",
+        "How It Works",
+        "Smart Vehicle Finance, Made Simple",
+        "Why Choose Us?",
+        "Manage Your Loan\nAnytime, Anywhere"
+      ],
+      "bodySnippet": "Vahan Finserv\nHome\nOur Banks\nHow It Works\nLoan Calculator\nAbout Us\nLogin\nApply Now\n★\nDriving Aspirations Forward\nGet Your\nDream\nVehicle Loan\n\nतुमच्या Dream Car चं स्वप्न आता एका Click वर! Best Interest Rates, Quick Approval आणि Trusted Bank Partners सोबत Drive Your Success Today.\n\nApply Now\nDownload APK\nTrusted by 10,000+\nApproved in 24h\nOUR BANKING PARTNERS\nTrusted by the best banks in India\n\nWe work with leading financial institutions to bring you the smartest loan offers, seamless approvals, ",
+      "generator": "",
+      "scripts": [
+        "https://www.googletagmanager.com/gtag/js?id=G-27CKHRMC33&cx=c&gtm=4e6a91h1",
+        "https://www.googletagmanager.com/gtag/js?id=G-NTD8SKWXT6",
+        "https://vahanfinserv.com/assets/index-DmsCtJwG.js"
+      ]
+    },
+    "screenshotPath": "public/assets/projects/vahanfinserv-home.png"
+  }
+]
