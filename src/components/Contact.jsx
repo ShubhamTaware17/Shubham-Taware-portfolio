@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { FaEnvelope, FaLocationDot, FaPhone, FaLinkedin } from 'react-icons/fa6';
+import { FaEnvelope, FaLocationDot, FaPhone, FaLinkedin, FaWhatsapp } from 'react-icons/fa6';
 import SectionHeading from './SectionHeading.jsx';
 import ContactForm from './ContactForm.jsx';
-import { contact, socials, isConfiguredEmail } from '../config/site.js';
+import { contact, socials, isConfiguredEmail, getWhatsAppUrl } from '../config/site.js';
 
 /** Slow-drifting colour fields behind the form. Still under reduced motion (the transforms are disabled there). */
 function AuroraBackground() {
@@ -42,6 +42,7 @@ export default function Contact() {
   };
 
   const linkedinSocial = socials.find((s) => s.label.toLowerCase() === 'linkedin');
+  const whatsappUrl = getWhatsAppUrl(contact.whatsapp || contact.phone, contact.whatsappMessage);
 
   return (
     <section
@@ -86,6 +87,25 @@ export default function Contact() {
                 </li>
               )}
 
+              {whatsappUrl && (
+                <li>
+                  <span className="contact__icon contact__icon--whatsapp" aria-hidden="true">
+                    <FaWhatsapp />
+                  </span>
+                  <div>
+                    <span className="contact__label">WhatsApp</span>
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="contact__whatsapp-link"
+                    >
+                      Chat on WhatsApp ↗
+                    </a>
+                  </div>
+                </li>
+              )}
+
               {linkedinSocial?.href && (
                 <li>
                   <span className="contact__icon" aria-hidden="true">
@@ -110,6 +130,21 @@ export default function Contact() {
                 </div>
               </li>
             </ul>
+
+            {whatsappUrl && (
+              <div className="contact__quick-chat">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn--whatsapp"
+                  aria-label="Direct message on WhatsApp (opens in new tab)"
+                >
+                  <FaWhatsapp aria-hidden="true" className="btn__icon" />
+                  <span>Quick Chat on WhatsApp</span>
+                </a>
+              </div>
+            )}
           </div>
 
           <ContactForm />

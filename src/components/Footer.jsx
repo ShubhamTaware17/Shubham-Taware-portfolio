@@ -1,8 +1,8 @@
-import { FaArrowUp, FaGithub, FaLinkedinIn } from 'react-icons/fa6';
+import { FaArrowUp, FaGithub, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa6';
 import Magnetic from './Magnetic.jsx';
 import { contact, footerTicker, isConfiguredEmail, isConfiguredUrl, navItems, site, socials } from '../config/site.js';
 
-const SOCIAL_ICONS = { github: FaGithub, linkedin: FaLinkedinIn };
+const SOCIAL_ICONS = { github: FaGithub, linkedin: FaLinkedinIn, whatsapp: FaWhatsapp };
 
 export default function Footer() {
   const year = new Date().getFullYear();

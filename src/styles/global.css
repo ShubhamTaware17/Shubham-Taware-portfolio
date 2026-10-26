@@ -10,11 +10,11 @@
   --text: #eef0f6;
   --text-muted: #adb3c4;
   --text-dim: #7f8699;
-  --accent: #8b7bff;
-  --accent-2: #3fe0d0;
-  --accent-3: #ff9a6b;
-  --ph: #ffc078;
-  --grad: linear-gradient(120deg, #8b7bff 0%, #3fe0d0 100%);
+  --accent: #ff4500;
+  --accent-2: #ff7700;
+  --accent-3: #ff1a1a;
+  --ph: #ffaa55;
+  --grad: linear-gradient(120deg, #ff1a1a 0%, #ff5500 50%, #ff8c00 100%);
 
   --font-display: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -63,8 +63,8 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(1100px 700px at 8% -12%, rgba(139, 123, 255, 0.16), transparent 60%),
-    radial-gradient(900px 600px at 100% 8%, rgba(63, 224, 208, 0.1), transparent 60%);
+    radial-gradient(1100px 700px at 8% -12%, rgba(255, 107, 43, 0.16), transparent 60%),
+    radial-gradient(900px 600px at 100% 8%, rgba(255, 170, 0, 0.12), transparent 60%);
 }
 
 /* Film grain for a tactile, editorial finish */
@@ -110,7 +110,7 @@ button {
 }
 
 ::selection {
-  background: rgba(139, 123, 255, 0.45);
+  background: rgba(255, 107, 43, 0.45);
   color: #fff;
 }
 
@@ -255,7 +255,7 @@ main {
 
 .btn--primary:hover {
   background: #ffffff;
-  box-shadow: 0 12px 40px -12px rgba(139, 123, 255, 0.75);
+  box-shadow: 0 12px 40px -12px rgba(255, 107, 43, 0.75);
 }
 
 .btn--ghost {
@@ -268,7 +268,7 @@ main {
 
 .btn--ghost:hover {
   border-color: var(--accent);
-  background: rgba(139, 123, 255, 0.1);
+  background: rgba(255, 107, 43, 0.1);
 }
 
 .btn--sm {
@@ -303,7 +303,7 @@ main {
   z-index: 70;
   background: var(--grad);
   transform-origin: 0 50%;
-  box-shadow: 0 0 14px rgba(139, 123, 255, 0.7);
+  box-shadow: 0 0 14px rgba(255, 107, 43, 0.7);
   pointer-events: none;
 }
 
@@ -314,7 +314,7 @@ main {
   z-index: 0;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(139, 123, 255, 0.13), rgba(63, 224, 208, 0.04) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 107, 43, 0.14), rgba(255, 170, 0, 0.05) 40%, transparent 70%);
   will-change: transform;
 }
 
@@ -629,7 +629,7 @@ main {
 
 .social:hover {
   border-color: var(--accent);
-  background: rgba(139, 123, 255, 0.12);
+  background: rgba(255, 107, 43, 0.12);
   color: #ffffff;
 }
 
@@ -688,6 +688,164 @@ main {
     width: 34px;
     height: 34px;
   }
+}
+
+/* ==========================================================================
+   WhatsApp Floating Action Button & Elements
+   ========================================================================== */
+.wa-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 85;
+}
+
+.wa-float__btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 18px 0 14px;
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: #ffffff;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 10px 28px -4px rgba(37, 211, 102, 0.45),
+    0 4px 12px rgba(0, 0, 0, 0.35);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition:
+    transform 0.35s var(--ease),
+    box-shadow 0.35s var(--ease),
+    background 0.3s ease;
+}
+
+.wa-float__btn:hover,
+.wa-float__btn:focus-visible {
+  transform: translateY(-3px) scale(1.02);
+  background: linear-gradient(135deg, #2ae771 0%, #169e8f 100%);
+  box-shadow:
+    0 14px 34px -2px rgba(37, 211, 102, 0.6),
+    0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.wa-float__btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.wa-float__pulse {
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  pointer-events: none;
+  background: rgba(37, 211, 102, 0.35);
+  z-index: -1;
+  animation: wa-pulse 2.6s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+@keyframes wa-pulse {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+}
+
+.wa-float__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.55rem;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.wa-float__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #ffffff;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.wa-float__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #a3ffc2;
+  box-shadow: 0 0 8px #a3ffc2;
+  animation: wa-dot-blink 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes wa-dot-blink {
+  0% { opacity: 0.6; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1.2); }
+}
+
+@media (max-width: 600px) {
+  .wa-float {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .wa-float__btn {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .wa-float__badge {
+    display: none;
+  }
+
+  .wa-float__icon-wrap {
+    font-size: 1.6rem;
+  }
+}
+
+/* WhatsApp themed elements in Contact section & buttons */
+.btn--whatsapp {
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: #ffffff;
+  border-color: rgba(37, 211, 102, 0.35);
+  box-shadow: 0 8px 24px -6px rgba(37, 211, 102, 0.4);
+}
+
+.btn--whatsapp:hover {
+  background: linear-gradient(135deg, #2ae771 0%, #169e8f 100%);
+  color: #ffffff;
+  box-shadow: 0 12px 32px -4px rgba(37, 211, 102, 0.6);
+  transform: translateY(-2px);
+}
+
+.contact__icon--whatsapp {
+  color: #25d366 !important;
+  border-color: rgba(37, 211, 102, 0.25) !important;
+  background: rgba(37, 211, 102, 0.08) !important;
+}
+
+.contact__details a.contact__whatsapp-link:hover {
+  color: #25d366;
+  border-color: #25d366;
+}
+
+.contact__quick-chat {
+  margin-top: 24px;
 }
 
 /* ==========================================================================

@@ -10,7 +10,7 @@ export default function Projects() {
 
         <div className="projects__grid">
           {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} featured={index === 0} />
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
       </div>

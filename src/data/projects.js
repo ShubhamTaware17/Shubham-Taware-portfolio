@@ -74,7 +74,7 @@ export const projects = [
     summary:
       'Training and live-lecture management platform with Student, Faculty, Executor, and Admin workflows, comprehensive role-based dashboards, lecture scheduling, enrollment, and API integrations.',
     stack: ['React.js', 'React Native', 'TypeScript', 'Spring Boot', 'REST APIs'],
-    accent: '#8b7bff',
+    accent: '#ff6b2b',
     liveUrl: 'https://caryanamlive.com',
     githubUrl: '',
     image: '/assets/projects/caryanamlive-home.png',
@@ -105,21 +105,21 @@ export const projects = [
   {
     id: 'avaaj-mann-ki',
     number: '06',
-    title: 'Avaaj – Mann Ki',
-    type: 'Cross-Platform Mobile Application',
-    category: 'Mobile Application',
+    title: 'AwajManki',
+    type: 'Anonymous Thoughts & Social Platform',
+    category: 'Social Platform & Mobile Web',
     year: '2025 — 2026',
     summary:
-      'Cross-platform mobile and web application featuring reusable interface components, smooth stack navigation, REST API integration, and dynamic content feeds with fluid touch interactions.',
-    stack: ['React Native', 'JavaScript', 'REST APIs', 'Mobile UI Design'],
-    accent: '#6366f1',
+      'Anonymous community platform ("Where Thoughts Matter More Than Identity") designed for free expression with AI-powered moderation, multilingual voice-to-text, and secure, respectful conversations.',
+    stack: ['React Native', 'React.js', 'REST APIs', 'Voice-to-Text', 'Tailwind CSS'],
+    accent: '#f97316',
     liveUrl: 'https://awaazmanki.com/',
     githubUrl: '',
     image: '/assets/projects/awaazmanki-home.png',
     featured: false,
     badge: 'Live Website',
     roleContribution:
-      'Mobile Frontend Developer: Built cross-platform screens, interactive feeds, custom navigation stacks, and API communication layers.',
+      'Frontend Developer: Built responsive web UI, anonymous feed interactions, voice-to-text integration, and multilingual localization.',
   },
 ];
 

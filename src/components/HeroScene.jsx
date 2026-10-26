@@ -74,13 +74,13 @@ export default function HeroScene({ reduced }) {
     key.position.set(3, 4, 5);
     scene.add(key);
 
-    const violetLight = new PointLight(0x8b7bff, 22, 12, 2);
-    violetLight.position.set(-3, -1.5, 2.5);
-    scene.add(violetLight);
+    const redLight = new PointLight(0xff2200, 24, 12, 2);
+    redLight.position.set(-3, -1.5, 2.5);
+    scene.add(redLight);
 
-    const tealLight = new PointLight(0x3fe0d0, 16, 12, 2);
-    tealLight.position.set(3, -2, -1.5);
-    scene.add(tealLight);
+    const orangeLight = new PointLight(0xff7700, 18, 12, 2);
+    orangeLight.position.set(3, -2, -1.5);
+    scene.add(orangeLight);
 
     // `tilt` follows the pointer; `spin` rotates continuously inside it.
     const tilt = new Group();
@@ -92,9 +92,9 @@ export default function HeroScene({ reduced }) {
       new Mesh(
         new IcosahedronGeometry(1.2, 1),
         new MeshStandardMaterial({
-          color: 0x16182b,
-          emissive: 0x2b2770,
-          emissiveIntensity: 0.55,
+          color: 0x1f0e0e,
+          emissive: 0x661100,
+          emissiveIntensity: 0.65,
           // Smooth shading with a broad, soft highlight. Flat faces caught the light as a
           // crisp triangle that read like a play button.
           metalness: 0.55,
@@ -105,21 +105,21 @@ export default function HeroScene({ reduced }) {
 
     const shell = new Mesh(
       new IcosahedronGeometry(1.2, 2),
-      new MeshBasicMaterial({ color: 0x8b7bff, wireframe: true, transparent: true, opacity: 0.32 }),
+      new MeshBasicMaterial({ color: 0xff4400, wireframe: true, transparent: true, opacity: 0.38 }),
     );
     shell.scale.setScalar(1.012);
     spin.add(shell);
 
     const ringInner = new Mesh(
       new TorusGeometry(1.9, 0.01, 12, 200),
-      new MeshBasicMaterial({ color: 0x3fe0d0, transparent: true, opacity: 0.8 }),
+      new MeshBasicMaterial({ color: 0xff1e00, transparent: true, opacity: 0.85 }),
     );
     ringInner.rotation.set(Math.PI / 2.6, 0.2, 0);
     tilt.add(ringInner);
 
     const ringOuter = new Mesh(
       new TorusGeometry(2.35, 0.006, 12, 220),
-      new MeshBasicMaterial({ color: 0x8b7bff, transparent: true, opacity: 0.6 }),
+      new MeshBasicMaterial({ color: 0xff8800, transparent: true, opacity: 0.7 }),
     );
     ringOuter.rotation.set(Math.PI / 4, -0.5, Math.PI / 6);
     tilt.add(ringOuter);

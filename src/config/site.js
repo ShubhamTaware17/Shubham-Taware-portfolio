@@ -12,6 +12,7 @@ export const site = {
   monogram: 'ST',
   role: 'Frontend Developer',
   phone: '+91 9923224600',
+  avatar: '/assets/image.png',
 };
 
 export const navItems = [
@@ -54,8 +55,24 @@ export const contact = {
     'Have an opportunity, a freelance project, or an idea you want to bring to life? Send a message or get in touch directly.',
   email: env.VITE_CONTACT_EMAIL || 'shubham.taware108@gmail.com',
   phone: '+91 9923224600',
+  whatsapp: env.VITE_WHATSAPP_NUMBER || '+91 9923224600',
+  whatsappMessage: 'Hi Shubham, I saw your portfolio and would like to connect!',
   location: 'Pune, India',
   endpoint: env.VITE_CONTACT_ENDPOINT || '',
+};
+
+/**
+ * Generate a direct WhatsApp click-to-chat URL.
+ * Automatically sanitizes phone number into digits and encodes the pre-filled message.
+ */
+export const getWhatsAppUrl = (
+  number = contact.whatsapp || contact.phone,
+  message = contact.whatsappMessage
+) => {
+  const cleanNumber = String(number || '').replace(/\D+/g, '');
+  if (!cleanNumber) return '';
+  const encodedText = encodeURIComponent(message || 'Hi Shubham, I saw your portfolio and would like to connect!');
+  return `https://wa.me/${cleanNumber}?text=${encodedText}`;
 };
 
 export const socials = [
@@ -68,6 +85,11 @@ export const socials = [
     label: 'GitHub',
     href: env.VITE_GITHUB_URL || 'https://github.com',
     icon: 'github',
+  },
+  {
+    label: 'WhatsApp',
+    href: getWhatsAppUrl('+91 9923224600', 'Hi Shubham, I saw your portfolio and would like to connect!'),
+    icon: 'whatsapp',
   },
 ];
 

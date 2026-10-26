@@ -23,6 +23,14 @@ function ProjectLink({ href, label, icon: Icon, primary = false }) {
   return null;
 }
 
+function getHostname(url, fallback) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return fallback;
+  }
+}
+
 export default function ProjectCard({ project, index, featured = false }) {
   const reduceMotion = useReducedMotion();
   const [imgError, setImgError] = useState(false);
@@ -73,41 +81,67 @@ export default function ProjectCard({ project, index, featured = false }) {
       >
         <motion.div className="project-card__spot" style={{ background: spotlight }} aria-hidden="true" />
 
+        {/* Top bar with clean number pill, category, and live badge */}
+        <div className="project-card__top">
+          <div className="project-card__top-meta">
+            <span className="project-card__number-chip">{project.number}</span>
+            <span className="project-card__category">{project.category || project.type}</span>
+          </div>
+          {project.badge && (
+            <span
+              className="project-card__badge"
+              style={{ borderColor: `${project.accent}66`, color: project.accent }}
+            >
+              {hasLiveLink && <span className="project-card__badge-pulse" style={{ backgroundColor: project.accent }} />}
+              {project.badge}
+            </span>
+          )}
+        </div>
+
+        {/* Framed macOS browser mockup */}
         <div className="project-card__visual" style={{ '--accent': project.accent }}>
-          {imgSrc && !imgError ? (
+          <div className="project-card__browser-window">
+            <div className="project-card__browser-bar" aria-hidden="true">
+              <div className="project-card__browser-dots">
+                <span className="project-card__browser-dot dot--red" />
+                <span className="project-card__browser-dot dot--yellow" />
+                <span className="project-card__browser-dot dot--green" />
+              </div>
+              <span className="project-card__browser-url">
+                {getHostname(project.liveUrl, `${project.id}.com`)}
+              </span>
+              <span className="project-card__browser-status">
+                <span className="project-card__status-dot" />
+                LIVE
+              </span>
+            </div>
+
             <div className="project-card__media">
-              <img
-                src={imgSrc}
-                alt={`${project.title} live interface preview`}
-                className="project-card__img"
-                loading="lazy"
-                onError={() => setImgError(true)}
-              />
+              {imgSrc && !imgError ? (
+                <img
+                  src={imgSrc}
+                  alt={`${project.title} live interface preview`}
+                  className="project-card__img"
+                  loading="lazy"
+                  onError={() => setImgError(true)}
+                />
+              ) : (
+                <div className="project-card__fallback">
+                  <div className="project-card__fallback-circle" />
+                  <span className="project-card__fallback-text">{project.category || 'Production Project'}</span>
+                </div>
+              )}
               <div className="project-card__media-glow" />
             </div>
-          ) : (
-            <div className="project-card__fallback">
-              <div className="project-card__fallback-circle" />
-              <span className="project-card__fallback-text">{project.category || 'Production Project'}</span>
-            </div>
-          )}
-
-          <div className="project-card__visual-header">
-            <span className="project-card__number">{project.number}</span>
-            {project.badge && (
-              <span className="project-card__badge" style={{ borderColor: `${project.accent}66`, color: project.accent }}>
-                {hasLiveLink && <span className="project-card__badge-pulse" style={{ backgroundColor: project.accent }} />}
-                {project.badge}
-              </span>
-            )}
           </div>
         </div>
 
+        {/* Card Body with consistent vertical baselines */}
         <div className="project-card__body">
           <div className="project-card__meta-bar">
-            <p className="project-card__meta">
-              {project.type} <span aria-hidden="true">/</span> {project.year}
-            </p>
+            <span className="project-card__type">{project.type}</span>
+            <span className="project-card__meta-sep" aria-hidden="true">•</span>
+            <span className="project-card__year">{project.year}</span>
           </div>
 
           <h3 id={titleId} className="project-card__title">
@@ -119,7 +153,7 @@ export default function ProjectCard({ project, index, featured = false }) {
           {project.roleContribution && (
             <p className="project-card__contribution">
               <span className="project-card__contribution-label">Key Contribution: </span>
-              {project.roleContribution}
+              {project.roleContribution.replace(/^Frontend (Developer|Engineer)[^:]*:\s*/i, '')}
             </p>
           )}
 

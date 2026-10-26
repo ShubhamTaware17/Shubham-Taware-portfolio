@@ -1,9 +1,10 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import SectionHeading from './SectionHeading.jsx';
 import { about, site } from '../config/site.js';
 import { renderPlaceholders } from '../utils/placeholders.jsx';
 import { EASE_OUT } from '../utils/motion.js';
+import profileImg from '../assets/image.png';
 
 /**
  * Splits the bio into words for the scroll fill. Words that sit inside a
@@ -47,6 +48,8 @@ function WordToken({ token, index, total, progress, reduceMotion }) {
 
 export default function About() {
   const bioRef = useRef(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: bioRef, offset: ['start 85%', 'end 55%'] });
   const tokens = tokenizeBio(about.bio);
@@ -64,15 +67,32 @@ export default function About() {
         >
           <motion.div
             className="about__portrait-art"
-            aria-hidden="true"
             variants={{
               hidden: { clipPath: 'inset(100% 0% 0% 0% round 28px)' },
               show: { clipPath: 'inset(0% 0% 0% 0% round 28px)', transition: { duration: 1.2, ease: EASE_OUT } },
             }}
           >
-            <span className="about__initials">{site.monogram}</span>
-            <span className="about__scan" />
-            <span className="about__grid-lines" />
+            {!imageError ? (
+              <img
+                src={profileImg}
+                alt={`${site.name} · ${site.role}`}
+                className={`about__portrait-img${imageLoaded ? ' is-loaded' : ''}`}
+                width="480"
+                height="600"
+                loading="lazy"
+                onLoad={() => setImageLoaded(true)}
+                onError={() => setImageError(true)}
+              />
+            ) : (
+              <span className="about__initials">{site.monogram}</span>
+            )}
+            <div className="about__portrait-overlay" aria-hidden="true" />
+            <span className="about__scan" aria-hidden="true" />
+            <span className="about__grid-lines" aria-hidden="true" />
+            <div className="about__portrait-badge">
+              <span className="about__badge-dot" aria-hidden="true" />
+              <span>Available for opportunities</span>
+            </div>
           </motion.div>
           <figcaption className="about__portrait-caption">{site.name} · {site.role}</figcaption>
         </motion.figure>
