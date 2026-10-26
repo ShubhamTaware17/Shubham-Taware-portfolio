@@ -696,7 +696,8 @@ main {
 .wa-float {
   position: fixed;
   bottom: 28px;
-  right: 28px;
+  left: 28px;
+  right: auto;
   z-index: 85;
 }
 
@@ -720,6 +721,9 @@ main {
   font-weight: 600;
   cursor: pointer;
   outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
   transition:
     transform 0.35s var(--ease),
     box-shadow 0.35s var(--ease),
@@ -736,7 +740,7 @@ main {
 }
 
 .wa-float__btn:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(0) scale(0.96);
 }
 
 .wa-float__pulse {
@@ -771,6 +775,7 @@ main {
   font-size: 1.55rem;
   line-height: 1;
   color: #ffffff;
+  flex-shrink: 0;
 }
 
 .wa-float__badge {
@@ -796,17 +801,33 @@ main {
   100% { opacity: 1; transform: scale(1.2); }
 }
 
+/* Tablet adjustments */
+@media (max-width: 860px) {
+  .wa-float {
+    bottom: 24px;
+    left: 22px;
+    right: auto;
+  }
+}
+
+/* Mobile: Compact circle pinned cleanly on the bottom-left */
 @media (max-width: 600px) {
   .wa-float {
-    bottom: 20px;
-    right: 20px;
+    bottom: max(18px, env(safe-area-inset-bottom, 18px));
+    left: max(16px, env(safe-area-inset-left, 16px));
+    right: auto;
   }
 
   .wa-float__btn {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     padding: 0;
     justify-content: center;
+    border-radius: 50%;
+  }
+
+  .wa-float__pulse {
+    border-radius: 50%;
   }
 
   .wa-float__badge {
@@ -814,7 +835,25 @@ main {
   }
 
   .wa-float__icon-wrap {
-    font-size: 1.6rem;
+    font-size: 1.55rem;
+  }
+}
+
+/* Ultra-small mobile phones (e.g. iPhone SE, 360px) */
+@media (max-width: 380px) {
+  .wa-float {
+    bottom: max(14px, env(safe-area-inset-bottom, 14px));
+    left: max(12px, env(safe-area-inset-left, 12px));
+    right: auto;
+  }
+
+  .wa-float__btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .wa-float__icon-wrap {
+    font-size: 1.4rem;
   }
 }
 
@@ -846,6 +885,13 @@ main {
 
 .contact__quick-chat {
   margin-top: 24px;
+}
+
+@media (max-width: 520px) {
+  .contact__quick-chat .btn--whatsapp {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ==========================================================================

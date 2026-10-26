@@ -3,6 +3,7 @@ import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring,
 import { FaArrowUpRightFromSquare, FaGithub } from 'react-icons/fa6';
 import { isConfiguredUrl } from '../config/site.js';
 import { EASE_OUT, SPRING } from '../utils/motion.js';
+import useMediaQuery from '../hooks/useMediaQuery.js';
 
 function ProjectLink({ href, label, icon: Icon, primary = false }) {
   if (isConfiguredUrl(href)) {
@@ -33,11 +34,12 @@ function getHostname(url, fallback) {
 
 export default function ProjectCard({ project, index, featured = false }) {
   const reduceMotion = useReducedMotion();
+  const isMobile = useMediaQuery('(max-width: 860px)');
   const [imgError, setImgError] = useState(false);
   const px = useMotionValue(0.5);
   const py = useMotionValue(0.5);
 
-  // 3D tilt: card leans toward the pointer
+  // 3D tilt: card leans toward the pointer (desktop mouse only)
   const rotateX = useSpring(useTransform(py, [0, 1], [6, -6]), SPRING);
   const rotateY = useSpring(useTransform(px, [0, 1], [-7, 7]), SPRING);
 
@@ -47,7 +49,7 @@ export default function ProjectCard({ project, index, featured = false }) {
   const spotlight = useMotionTemplate`radial-gradient(460px circle at ${spotX} ${spotY}, ${project.accent}2b, transparent 65%)`;
 
   const handleMove = (event) => {
-    if (reduceMotion || event.pointerType !== 'mouse') return;
+    if (reduceMotion || isMobile || event.pointerType !== 'mouse') return;
     const rect = event.currentTarget.getBoundingClientRect();
     px.set((event.clientX - rect.left) / rect.width);
     py.set((event.clientY - rect.top) / rect.height);
@@ -67,15 +69,19 @@ export default function ProjectCard({ project, index, featured = false }) {
   return (
     <motion.article
       className={`project-card${featured ? ' project-card--featured' : ''}`}
-      initial={{ opacity: 0, y: 70, rotateX: 18 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.9, delay: Math.min(index * 0.1, 0.4), ease: EASE_OUT }}
+      initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 70, rotateX: 18 }}
+      whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, y: 0, rotateX: 0 }}
+      viewport={{ once: true, amount: isMobile ? 0.08 : 0.15 }}
+      transition={{
+        duration: isMobile ? 0.55 : 0.9,
+        delay: isMobile ? 0.05 : Math.min(index * 0.1, 0.4),
+        ease: EASE_OUT,
+      }}
       aria-labelledby={titleId}
     >
       <motion.div
         className="project-card__tilt"
-        style={{ rotateX, rotateY }}
+        style={isMobile ? undefined : { rotateX, rotateY }}
         onPointerMove={handleMove}
         onPointerLeave={handleLeave}
       >
@@ -151,10 +157,12 @@ export default function ProjectCard({ project, index, featured = false }) {
           <p className="project-card__summary">{project.summary}</p>
 
           {project.roleContribution && (
-            <p className="project-card__contribution">
-              <span className="project-card__contribution-label">Key Contribution: </span>
-              {project.roleContribution.replace(/^Frontend (Developer|Engineer)[^:]*:\s*/i, '')}
-            </p>
+            <div className="project-card__contribution">
+              <span className="project-card__contribution-label">Key Contribution:</span>
+              <span className="project-card__contribution-text">
+                {project.roleContribution.replace(/^Frontend (Developer|Engineer)[^:]*:\s*/i, '')}
+              </span>
+            </div>
           )}
 
           <ul className="project-card__stack" aria-label="Technologies used">

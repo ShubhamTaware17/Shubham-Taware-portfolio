@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import SectionHeading from './SectionHeading.jsx';
-import { skillGroups, skills } from '../data/skills.js';
+import { orbitSkills, skillGroups } from '../data/skills.js';
 import { EASE_OUT } from '../utils/motion.js';
 
 const INNER_RING_COUNT = 4;
@@ -10,15 +10,14 @@ const RING_SPEED = { inner: '26s', outer: '38s' };
 
 /** Skill icons orbit two rings. Hovering or focusing an icon pauses the orbit and names the skill. */
 function SkillOrbit() {
-  const [activeName, setActiveName] = useState(skills[0].name);
-  const innerSkills = skills.slice(0, INNER_RING_COUNT);
-  const outerSkills = skills.slice(INNER_RING_COUNT);
+  const [activeName, setActiveName] = useState(orbitSkills[0].name);
+  const innerSkills = orbitSkills.slice(0, INNER_RING_COUNT);
+  const outerSkills = orbitSkills.slice(INNER_RING_COUNT);
 
   const renderRing = (ringSkills, ring, startOffset) => (
     <div
       className={`orbit__ring orbit__ring--${ring}`}
       style={{ '--dur': RING_SPEED[ring] }}
-     
     >
       {ringSkills.map((skill, index) => {
         const angle = startOffset + (360 / ringSkills.length) * index;
@@ -57,7 +56,7 @@ function SkillOrbit() {
           <span className="orbit__track orbit__track--inner" aria-hidden="true" />
           <span className="orbit__track orbit__track--outer" aria-hidden="true" />
           <div className="orbit__core" aria-hidden="true">
-            <span>FE</span>
+            <span>ST</span>
           </div>
           {renderRing(innerSkills, 'inner', 0)}
           {renderRing(outerSkills, 'outer', 18)}
@@ -87,8 +86,8 @@ function SkillTile({ skill }) {
       className="tile-wrap"
       style={{ '--c': skill.color }}
       variants={{
-        hidden: { opacity: 0, scale: 0.8, rotate: -8 },
-        show: { opacity: 1, scale: 1, rotate: 0, transition: { duration: 0.6, ease: EASE_OUT } },
+        hidden: { opacity: 0, scale: 0.85, y: 12 },
+        show: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.45, ease: EASE_OUT } },
       }}
     >
       <div className="tile" onPointerMove={handleMove}>
@@ -113,15 +112,18 @@ export default function Skills() {
           <div className="skills__groups">
             {skillGroups.map((group) => (
               <section key={group.title} className="skill-group" aria-labelledby={`group-${group.title.replace(/\W+/g, '-')}`}>
-                <h3 id={`group-${group.title.replace(/\W+/g, '-')}`} className="skill-group__title">
-                  {group.title}
-                </h3>
+                <div className="skill-group__header">
+                  <h3 id={`group-${group.title.replace(/\W+/g, '-')}`} className="skill-group__title">
+                    {group.title}
+                  </h3>
+                  <span className="skill-group__count">{group.items.length} skills</span>
+                </div>
                 <motion.ul
                   className="skill-group__tiles"
                   initial="hidden"
                   whileInView="show"
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ staggerChildren: 0.08, delayChildren: 0.1 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ staggerChildren: 0.05, delayChildren: 0.05 }}
                 >
                   {group.items.map((skill) => (
                     <SkillTile key={skill.name} skill={skill} />
